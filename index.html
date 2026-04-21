@@ -108,10 +108,22 @@
       height: 100vh;
       min-height: 600px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       text-align: center;
       overflow: hidden;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: heroFade 1.2s ease-out forwards;
+      padding-top: 100px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-content { padding-top: 80px; }
+      .hero-logo { width: min(260px, 60vw); }
     }
 
     .hero-bg {
@@ -119,7 +131,7 @@
       inset: 0;
       background-image: url('hero.jpg');
       background-size: cover;
-      background-position: center center;
+      background-position: center top;
       filter: brightness(0.35);
       transform: scale(1.05);
       animation: heroZoom 20s ease-out forwards;
@@ -136,12 +148,6 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
       opacity: 0.4;
       pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      animation: heroFade 1.2s ease-out forwards;
     }
 
     @keyframes heroFade {
@@ -709,6 +715,19 @@
 
     .ig-connect-note a { color: var(--accent); }
 
+    .merch-skeleton {
+      pointer-events: none;
+      min-height: 280px;
+      background: linear-gradient(90deg, var(--surface) 25%, var(--surface2) 50%, var(--surface) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
     /* ── SHOP ── */
     #shop {
       background: var(--black);
@@ -1210,36 +1229,18 @@
       </div>
     </div>
 
-    <!-- Printful / Squarespace store preview cards -->
-    <!-- These link directly to the existing merch-store page -->
-    <div class="merch-grid">
-      <a href="https://www.tukbandofficial.com/merch-store" target="_blank" class="merch-card reveal">
-        <div class="merch-img-placeholder">
-          <svg viewBox="0 0 24 24"><path d="M20 7h-4V5c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-10-2h4v2h-4V5zm0 9v-2h4v2h-4zm0 0"/></svg>
-        </div>
-        <div class="merch-info">
-          <div class="merch-name">TUK Apparel</div>
-          <div class="merch-price">Shop Now →</div>
-        </div>
-      </a>
-      <a href="https://www.tukbandofficial.com/merch-store" target="_blank" class="merch-card reveal">
-        <div class="merch-img-placeholder">
-          <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </div>
-        <div class="merch-info">
-          <div class="merch-name">Accessories</div>
-          <div class="merch-price">Shop Now →</div>
-        </div>
-      </a>
-      <a href="https://www.tukbandofficial.com/merch-store" target="_blank" class="merch-card reveal">
-        <div class="merch-img-placeholder">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12z"/></svg>
-        </div>
-        <div class="merch-info">
-          <div class="merch-name">Music & Bundles</div>
-          <div class="merch-price">Shop Now →</div>
-        </div>
-      </a>
+    <!-- Printful products — loaded dynamically via /.netlify/functions/products -->
+    <div class="merch-grid" id="merch-grid">
+      <!-- Loading skeletons -->
+      <div class="merch-card merch-skeleton"></div>
+      <div class="merch-card merch-skeleton"></div>
+      <div class="merch-card merch-skeleton"></div>
+      <div class="merch-card merch-skeleton"></div>
+    </div>
+
+    <div id="merch-error" style="display:none; text-align:center; padding:2rem; color:var(--muted); font-family:var(--font-cond); letter-spacing:0.05em;">
+      Couldn't load products right now —
+      <a href="https://www.tukbandofficial.com/merch-store" target="_blank" style="color:var(--accent);">visit the full store</a>.
     </div>
 
     <div class="shop-cta reveal">
@@ -1334,7 +1335,42 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  /* ── TWITCH: shows VOD clip by default, auto-switches to live when streaming ── */
+  /* ── MERCH — loads from /.netlify/functions/products ── */
+  async function loadMerch() {
+    const grid = document.getElementById('merch-grid');
+    const errorEl = document.getElementById('merch-error');
+    try {
+      const res = await fetch('/.netlify/functions/products');
+      if (!res.ok) throw new Error('Failed to fetch products');
+      const products = await res.json();
+
+      if (!products.length) throw new Error('No products');
+
+      grid.innerHTML = products.slice(0, 8).map(p => {
+        const img = p.thumbnail_url
+          ? `<img src="${p.thumbnail_url}" alt="${p.name}" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:grayscale(15%);transition:filter 0.3s;" onmouseover="this.style.filter='grayscale(0%)'" onmouseout="this.style.filter='grayscale(15%)'" />`
+          : `<div class="merch-img-placeholder"><svg viewBox="0 0 24 24"><path d="M20 7h-4V5c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2z" fill="var(--border)"/></svg></div>`;
+        const price = p.min_price
+          ? `$${parseFloat(p.min_price).toFixed(2)}`
+          : 'Shop Now →';
+        return `
+          <a href="https://www.tukbandofficial.com/merch-store" target="_blank" class="merch-card">
+            ${img}
+            <div class="merch-info">
+              <div class="merch-name">${p.name}</div>
+              <div class="merch-price">${price}</div>
+            </div>
+          </a>`;
+      }).join('');
+
+    } catch (err) {
+      grid.style.display = 'none';
+      errorEl.style.display = 'block';
+      console.error('Merch load error:', err);
+    }
+  }
+
+  loadMerch();
   const TWITCH_CHANNEL = 'tukbandofficial';
   const TWITCH_VOD_URL = 'https://clips.twitch.tv/SparklyInexpensiveCobblerRlyTho-IPzj6vX3MiYREOkR';
   // Extract clip slug from the VOD URL
