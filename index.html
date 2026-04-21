@@ -1376,34 +1376,45 @@
   checkTwitchLive();
 
   /* ── CONTACT FORM ── */
-  // Wire up to Formspree (free tier) — replace YOUR_FORM_ID with your Formspree endpoint
-  // Sign up at https://formspree.io and create a form to get the ID.
+  /* ── CONTACT FORM (Formspree → tukmusicofficial@gmail.com) ──
+     One-time setup: go to https://formspree.io/f/tukmusicofficial@gmail.com
+     and click "Claim this form" while logged into (or signing up for) Formspree.
+     That's it — submissions will land in Gmail automatically. ── */
   async function handleSubmit(e) {
     e.preventDefault();
     const form = document.getElementById('contact-form');
     const status = document.getElementById('form-status');
+    const btn = form.querySelector('[type="submit"]');
     const data = new FormData(form);
+
     status.style.display = 'block';
     status.textContent = 'Sending...';
     status.style.color = 'var(--muted)';
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
 
     try {
-      // Replace https://formspree.io/f/YOUR_FORM_ID with your actual Formspree endpoint
-      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const res = await fetch('https://formspree.io/f/tukmusicofficial@gmail.com', {
         method: 'POST',
         body: data,
         headers: { 'Accept': 'application/json' }
       });
+      const json = await res.json();
       if (res.ok) {
         status.textContent = 'Message sent! We\'ll get back to you soon.';
         status.style.color = '#00c896';
         form.reset();
+        btn.textContent = 'Sent \u2713';
+        setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message'; }, 4000);
       } else {
-        throw new Error();
+        throw new Error(json?.errors?.[0]?.message || 'Form error');
       }
-    } catch {
-      status.textContent = 'Oops — something went wrong. Email us directly at your@email.com';
+    } catch (err) {
+      status.textContent = 'Something went wrong — email us directly at tukmusicofficial@gmail.com';
       status.style.color = 'var(--accent)';
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+      console.error(err);
     }
   }
 </script>
