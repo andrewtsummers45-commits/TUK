@@ -1340,15 +1340,9 @@
     const grid = document.getElementById('merch-grid');
     const errorEl = document.getElementById('merch-error');
     try {
-      const res = await fetch('https://api.printful.com/store/products', {
-        headers: {
-          'Authorization': 'Bearer ZeyGIvyBnpRleWXc5pATdQkrGxf8B69Bd06Asy6c',
-          'X-PF-Store-Id': '14345171',
-        },
-      });
-      if (!res.ok) throw new Error('Printful error');
-      const data = await res.json();
-      const products = data.result || [];
+      const res = await fetch('/api/products');
+      if (!res.ok) throw new Error('Failed to fetch products');
+      const products = await res.json();
       if (!products.length) throw new Error('No products');
 
       grid.innerHTML = products.slice(0, 8).map(p => {
