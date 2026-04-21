@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TUK Band Official</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --deep: #111111;
+      --surface: #1a1a1a;
+      --surface2: #242424;
+      --border: rgba(255,255,255,0.08);
+      --accent: #c8102e;
+      --accent2: #e63950;
+      --text: #f0ece4;
+      --muted: #8a8680;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+      --font-cond: 'Barlow Condensed', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      height: 70px;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo img {
+      height: 44px;
+      filter: brightness(1.1);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      font-family: var(--font-cond);
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #fff !important;
+      padding: 0.5rem 1.25rem;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      transition: background 0.2s;
+    }
+
+    .nav-cta:hover { background: var(--accent2) !important; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      transition: all 0.3s;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: heroFade 1.2s ease-out forwards;
+      padding-top: 100px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-content { padding-top: 80px; }
+      .hero-logo { width: min(260px, 60vw); }
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('hero.jpg');
+      background-size: cover;
+      background-position: center top;
+      filter: brightness(0.35);
+      transform: scale(1.05);
+      animation: heroZoom 20s ease-out forwards;
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1.05); }
+      to { transform: scale(1); }
+    }
+
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    @keyframes heroFade {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-logo {
+      width: min(340px, 70vw);
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 0 40px rgba(200,16,46,0.3));
+    }
+
+    .hero-tagline {
+      font-family: var(--font-cond);
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-tagline em { color: var(--accent); font-style: normal; }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      font-family: var(--font-cond);
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.85rem 2rem;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+      transition: background 0.2s, transform 0.15s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+
+    .btn-outline {
+      font-family: var(--font-cond);
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--text);
+      padding: 0.85rem 2rem;
+      border: 1px solid rgba(240,236,228,0.3);
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+      transition: border-color 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+
+    .btn-outline:hover { border-color: var(--text); transform: translateY(-2px); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      z-index: 2;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    .hero-scroll span {
+      font-family: var(--font-cond);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(var(--muted), transparent);
+    }
+
+    /* ── LIVE STREAM BANNER ── */
+    #live-stream {
+      background: linear-gradient(135deg, #6441a5 0%, #4a2d7c 100%);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .stream-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 500px;
+    }
+
+    .stream-embed {
+      position: relative;
+      background: #000;
+    }
+
+    .stream-embed iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      display: block;
+      border: none;
+    }
+
+    .stream-offline {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #0e0e10;
+      gap: 1rem;
+    }
+
+    .stream-offline-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(100,65,165,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stream-offline-icon svg { width: 28px; height: 28px; fill: #6441a5; }
+
+    .stream-offline p {
+      font-family: var(--font-cond);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+    }
+
+    .stream-info {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.12);
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      width: fit-content;
+      font-family: var(--font-cond);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff4444;
+      animation: livePulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .stream-info h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: #fff;
+    }
+
+    .stream-info p {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
+      max-width: 380px;
+    }
+
+    .stream-follow {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-twitch {
+      font-family: var(--font-cond);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: #6441a5;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-twitch:hover { background: #7d55c7; }
+    .btn-twitch svg { width: 16px; height: 16px; fill: #fff; }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 6rem 3rem; }
+
+    .section-label {
+      font-family: var(--font-cond);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-rule {
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--deep);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-img-stack {
+      position: relative;
+      height: 520px;
+    }
+
+    .about-img-main {
+      position: absolute;
+      top: 0; left: 0;
+      width: 78%;
+      height: 85%;
+      object-fit: cover;
+      filter: grayscale(20%);
+    }
+
+    .about-img-accent {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 55%;
+      height: 55%;
+      object-fit: cover;
+      border: 4px solid var(--deep);
+      filter: grayscale(20%);
+    }
+
+    .about-accent-bar {
+      position: absolute;
+      top: -20px; left: -20px;
+      width: 80px;
+      height: 80px;
+      border-left: 4px solid var(--accent);
+      border-top: 4px solid var(--accent);
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      color: rgba(240,236,228,0.8);
+      margin-bottom: 1.25rem;
+      max-width: 480px;
+    }
+
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .member-card {
+      text-align: center;
+      padding: 1rem 0.5rem;
+      border-top: 2px solid var(--border);
+    }
+
+    .member-name {
+      font-family: var(--font-cond);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.2rem;
+    }
+
+    .member-role {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-family: var(--font-cond);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── MUSIC ── */
+    #music {
+      background: var(--black);
+    }
+
+    .music-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .albums-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .album-card {
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      group: true;
+    }
+
+    .album-card:hover .album-overlay { opacity: 1; }
+    .album-card:hover .album-art { transform: scale(1.04); }
+
+    .album-art {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .album-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(200,16,46,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .play-icon {
+      width: 64px;
+      height: 64px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .play-icon svg { width: 24px; height: 24px; fill: #fff; margin-left: 4px; }
+
+    .album-info {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .album-title {
+      font-family: var(--font-cond);
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.25rem;
+    }
+
+    .album-year {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: var(--font-cond);
+      letter-spacing: 0.1em;
+    }
+
+    .album-desc {
+      padding: 1rem 0;
+      font-size: 0.88rem;
+      color: rgba(240,236,228,0.65);
+      line-height: 1.65;
+    }
+
+    /* ── EVENTS ── */
+    #events {
+      background: var(--surface);
+    }
+
+    .events-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .event-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .event-item:first-of-type { border-top: 1px solid var(--border); }
+
+    .event-date {
+      text-align: center;
+    }
+
+    .event-month {
+      font-family: var(--font-cond);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .event-day {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .event-details h3 {
+      font-family: var(--font-cond);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.25rem;
+    }
+
+    .event-venue {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .event-no-shows {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--muted);
+      font-family: var(--font-cond);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── PHOTOS / INSTAGRAM ── */
+    #photos {
+      background: var(--deep);
+    }
+
+    .photos-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .photos-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 6px;
+    }
+
+    .ig-item {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .ig-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(15%);
+      transition: transform 0.4s ease, filter 0.3s;
+    }
+
+    .ig-item:hover img { transform: scale(1.06); filter: grayscale(0%); }
+
+    .ig-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(200,16,46,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .ig-item:hover .ig-overlay { opacity: 1; }
+
+    .ig-overlay svg { width: 28px; height: 28px; fill: #fff; }
+
+    .ig-connect-note {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      border: 1px dashed var(--border);
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    .ig-connect-note p {
+      font-family: var(--font-cond);
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .ig-connect-note a { color: var(--accent); }
+
+    .merch-skeleton {
+      pointer-events: none;
+      min-height: 280px;
+      background: linear-gradient(90deg, var(--surface) 25%, var(--surface2) 50%, var(--surface) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ── SHOP ── */
+    #shop {
+      background: var(--black);
+    }
+
+    .shop-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .shop-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .printful-badge {
+      font-family: var(--font-cond);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .printful-badge::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #00c896;
+      border-radius: 50%;
+    }
+
+    .merch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .merch-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .merch-card:hover {
+      border-color: rgba(200,16,46,0.4);
+      transform: translateY(-4px);
+    }
+
+    .merch-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .merch-img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .merch-img-placeholder svg { width: 40px; height: 40px; fill: var(--border); }
+
+    .merch-info { padding: 1rem; }
+
+    .merch-name {
+      font-family: var(--font-cond);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .merch-price {
+      color: var(--accent);
+      font-family: var(--font-cond);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .shop-cta {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--surface);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    label {
+      font-family: var(--font-cond);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    input, textarea {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.75rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 2px;
+      width: 100%;
+    }
+
+    input:focus, textarea:focus { border-color: var(--accent); }
+
+    textarea { resize: vertical; min-height: 130px; }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .social-link:hover {
+      border-color: rgba(240,236,228,0.2);
+      background: var(--surface2);
+    }
+
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .social-icon svg { width: 18px; height: 18px; fill: #fff; }
+    .social-icon.ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .social-icon.fb { background: #1877f2; }
+    .social-icon.yt { background: #ff0000; }
+    .social-icon.tw { background: #6441a5; }
+    .social-icon.sp { background: #1db954; }
+
+    .social-name {
+      font-family: var(--font-cond);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+
+    .social-handle { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .footer-logo img {
+      height: 50px;
+      margin-bottom: 1.5rem;
+      filter: brightness(0.7);
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      list-style: none;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-nav a {
+      font-family: var(--font-cond);
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .footer-nav a:hover { color: var(--text); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(138,134,128,0.5);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-img-stack { height: 300px; margin-bottom: 2rem; }
+      .stream-container { grid-template-columns: 1fr; }
+      .stream-embed { min-height: 250px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .members-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .event-item { grid-template-columns: 60px 1fr; }
+      .event-item .btn-outline { display: none; }
+    }
+
+    /* ── MOBILE NAV OPEN ── */
+    .nav-open .nav-links {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 70px; left: 0; right: 0;
+      background: rgba(10,10,10,0.98);
+      padding: 2rem;
+      gap: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">
+    <img src="https://images.squarespace-cdn.com/content/v1/66df41fbc651770563eb0948/b23cbb82-a52e-4143-a6f0-e7586f4d9dbe/TUK+textured+-+12%27%27+x+12%27%27.png?format=1500w" alt="TUK Band" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#music">Music</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#live-stream">Live</a></li>
+    <li><a href="#photos">Photos</a></li>
+    <li><a href="#shop">Merch</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://www.tukbandofficial.com/merch-store" target="_blank" class="nav-cta">Shop Now</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <img class="hero-logo"
+      src="https://images.squarespace-cdn.com/content/v1/66df41fbc651770563eb0948/b23cbb82-a52e-4143-a6f0-e7586f4d9dbe/TUK+textured+-+12%27%27+x+12%27%27.png?format=1500w"
+      alt="TUK" />
+    <p class="hero-tagline">From <em>Titletown</em> &mdash; Green Bay, Wisconsin</p>
+    <div class="hero-ctas">
+      <a href="https://open.spotify.com/album/3al9uhBgPsUpnP1OqZYfiv?si=Tuj_x8ToShST-x-ZGtd5aw" target="_blank" class="btn-primary">Listen Now</a>
+      <a href="#events" class="btn-outline">Upcoming Shows</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span></div>
+</section>
+
+<!-- ── LIVE STREAM ── -->
+<div id="live-stream">
+  <div class="stream-container">
+    <div class="stream-embed">
+      <!-- Shows VOD clip by default; swaps to live channel player when streaming -->
+      <div id="twitch-container" style="position:absolute;inset:0;"></div>
+    </div>
+    <div class="stream-info">
+      <div class="live-badge" id="live-badge" style="display:none;">
+        <span class="live-dot"></span> Live Now
+      </div>
+      <h2 id="stream-heading">WATCH OUR<br>LATEST<br>STREAM</h2>
+      <p id="stream-subtext">We stream live sessions, rehearsals, and behind-the-scenes content. Follow us so you never miss a stream.</p>
+      <div class="stream-follow">
+        <a href="https://www.twitch.tv/tukbandofficial" target="_blank" class="btn-twitch">
+          <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+          Follow on Twitch
+        </a>
+        <a href="https://www.twitch.tv/tukbandofficial" target="_blank" class="btn-twitch" style="background:transparent; border-color:rgba(255,255,255,0.2);">
+          View All Streams
+        </a>
+      </div>
+      <p style="font-size:0.78rem; color:rgba(255,255,255,0.4); margin-top:0.5rem;" id="stream-note">
+        This section automatically switches to the live player when TUK goes live on Twitch.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-stack reveal">
+      <div class="about-accent-bar"></div>
+      <img class="about-img-main"
+        src="https://images.squarespace-cdn.com/content/v1/66df41fbc651770563eb0948/274338f4-d015-44d7-8e8a-11560ce1c76b/TUK+Live+at+EPIC+%2858+of+124%29.jpg"
+        alt="TUK Band live" />
+      <img class="about-img-accent"
+        src="https://images.squarespace-cdn.com/content/v1/66df41fbc651770563eb0948/cd256030-a03d-4e1c-af46-ffa1ce60a727/TUK+Live+at+EPIC+%2886+of+124%29.jpg"
+        alt="TUK Band" />
+    </div>
+    <div class="reveal">
+      <p class="section-label">Our Story</p>
+      <h2 class="section-title">TUK</h2>
+      <div class="section-rule"></div>
+      <p>From the frozen tundra of Green Bay, Wisconsin, TUK is a powerhouse original rock band carving out their place in the scene since their formation in 2021.</p>
+      <p>Drawing from the intensity of Metallica, the progressive edge of Gojira, and the anthemic spirit of Queen, TUK delivers a dynamic sound that demands your full attention.</p>
+      <p>Their songs span the full range of human experience — from good times on the town to the painful yet fulfilling journey of personal growth.</p>
+      <div class="members-grid">
+        <div class="member-card">
+          <div class="member-name">Andrew</div>
+          <div class="member-role">Vocals / Guitar</div>
+        </div>
+        <div class="member-card">
+          <div class="member-name">Allen</div>
+          <div class="member-role">Rhythm Guitar</div>
+        </div>
+        <div class="member-card">
+          <div class="member-name">Ty</div>
+          <div class="member-role">Bass</div>
+        </div>
+        <div class="member-card">
+          <div class="member-name">Chopp</div>
+          <div class="member-role">Drums</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MUSIC ── -->
+<section id="music">
+  <div class="music-inner">
+    <p class="section-label reveal">Discography</p>
+    <h2 class="section-title reveal">Music</h2>
+    <div class="section-rule reveal"></div>
+    <div class="albums-grid">
+
+      <a href="https://open.spotify.com/album/3al9uhBgPsUpnP1OqZYfiv?si=Tuj_x8ToShST-x-ZGtd5aw" target="_blank" class="album-card reveal">
+        <img class="album-art"
+          src="https://images.squarespace-cdn.com/content/v1/66df41fbc651770563eb0948/37a0624a-f292-4cea-96e3-172105e6b581/TUK+Traffic+Light+-+Front.jpg"
+          alt="Confrontations" />
+        <div class="album-overlay">
+          <div class="play-icon">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="album-info">
+          <div class="album-title">Confrontations</div>
+          <div class="album-year">June 2024</div>
+        </div>
+        <div class="album-desc">"I was confronted through writing this album. Therefore, we made this album to confront you. Are you ready to listen?"</div>
+      </a>
+
+      <a href="https://open.spotify.com/album/05e6mjd0QGO8dT70g8eGAa" target="_blank" class="album-card reveal">
+        <img class="album-art"
+          src="https://images.squarespace-cdn.com/content/v1/66df41fbc651770563eb0948/884a9179-7049-4524-a0dd-685cbbf44928/Stereo+City+Artwork.jpg"
+          alt="The Story of Stereo City" />
+        <div class="album-overlay">
+          <div class="play-icon">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="album-info">
+          <div class="album-title">The Story of Stereo City</div>
+          <div class="album-year">June 2021</div>
+        </div>
+        <div class="album-desc">The album that started it all — Queen, Metallica, MCR, and Meatloaf walk into a bar in Minneapolis. What happens next is history.</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── EVENTS ── -->
+<section id="events">
+  <div class="events-inner">
+    <p class="section-label reveal">Tour Dates</p>
+    <h2 class="section-title reveal">Shows</h2>
+    <div class="section-rule reveal"></div>
+
+    <!-- ── REPLACE / ADD events below. Copy an .event-item block for each show. ── -->
+    <div id="events-list">
+      <div class="event-no-shows reveal">
+        <p>No upcoming shows listed — check back soon or follow us on social for announcements.</p>
+      </div>
+    </div>
+
+    <!-- Example event block (hidden; duplicate and fill in for real shows):
+    <div class="event-item reveal">
+      <div class="event-date">
+        <div class="event-month">May</div>
+        <div class="event-day">10</div>
+      </div>
+      <div class="event-details">
+        <h3>The Bar at EPIC</h3>
+        <div class="event-venue">Green Bay, WI &mdash; Doors 7pm</div>
+      </div>
+      <a href="#" class="btn-outline">Tickets</a>
+    </div>
+    -->
+  </div>
+</section>
+
+<!-- ── PHOTOS ── -->
+<section id="photos">
+  <div class="photos-inner">
+    <div class="photos-header">
+      <div>
+        <p class="section-label">Gallery</p>
+        <h2 class="section-title">Photos</h2>
+      </div>
+      <a href="https://www.instagram.com/tukbandofficial/" target="_blank" class="btn-outline">View on Instagram</a>
+    </div>
+
+    <!-- Behold.so live Instagram feed — auto-updates when you post -->
+    <behold-widget feed-id="ZwBtJlQYCq2KiLyiZCRA"></behold-widget>
+    <script>
+      (() => {
+        const d=document,s=d.createElement("script");s.type="module";
+        s.src="https://w.behold.so/widget.js";d.head.append(s);
+      })();
+    </script>
+  </div>
+</section>
+
+<!-- ── SHOP ── -->
+<section id="shop">
+  <div class="shop-inner">
+    <div class="shop-header reveal">
+      <div>
+        <p class="section-label">Official Merchandise</p>
+        <h2 class="section-title">Merch</h2>
+      </div>
+      <div>
+        <div class="printful-badge" style="margin-bottom:1rem;">Fulfilled by Printful</div>
+        <a href="https://www.tukbandofficial.com/merch-store" target="_blank" class="btn-primary">View Full Store</a>
+      </div>
+    </div>
+
+    <!-- Printful products — loaded dynamically via /.netlify/functions/products -->
+    <div class="merch-grid" id="merch-grid">
+      <!-- Loading skeletons -->
+      <div class="merch-card merch-skeleton"></div>
+      <div class="merch-card merch-skeleton"></div>
+      <div class="merch-card merch-skeleton"></div>
+      <div class="merch-card merch-skeleton"></div>
+    </div>
+
+    <div id="merch-error" style="display:none; text-align:center; padding:2rem; color:var(--muted); font-family:var(--font-cond); letter-spacing:0.05em;">
+      Couldn't load products right now —
+      <a href="https://www.tukbandofficial.com/merch-store" target="_blank" style="color:var(--accent);">visit the full store</a>.
+    </div>
+
+    <div class="shop-cta reveal">
+      <a href="https://www.tukbandofficial.com/merch-store" target="_blank" class="btn-primary" style="font-size:0.95rem; padding:1rem 3rem;">
+        Browse the Full Store
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title" style="font-size:clamp(2.5rem,6vw,4.5rem);">Contact</h2>
+      <div class="section-rule"></div>
+      <p style="color:rgba(240,236,228,0.7); margin-bottom:2rem;">
+        Booking inquiries, press, or just want to say hey? Drop us a line below or find us on socials.
+      </p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/tukbandofficial/" target="_blank" class="social-link">
+          <div class="social-icon ig"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+          <div><div class="social-name">Instagram</div><div class="social-handle">@tukbandofficial</div></div>
+        </a>
+        <a href="https://www.twitch.tv/tukbandofficial" target="_blank" class="social-link">
+          <div class="social-icon tw"><svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg></div>
+          <div><div class="social-name">Twitch</div><div class="social-handle">tukbandofficial</div></div>
+        </a>
+        <a href="https://open.spotify.com/album/3al9uhBgPsUpnP1OqZYfiv" target="_blank" class="social-link">
+          <div class="social-icon sp"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></div>
+          <div><div class="social-name">Spotify</div><div class="social-handle">Listen to TUK</div></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <!-- Squarespace form replacement: mailto fallback or embed form via Formspree -->
+      <form class="contact-form" id="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="your@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="Booking, press, general..." />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required placeholder="Say something..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="margin-top:0.5rem;">Send Message</button>
+        <p id="form-status" style="font-size:0.82rem; color:var(--accent); margin-top:0.5rem; display:none;"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">
+    <img src="https://images.squarespace-cdn.com/content/v1/66df41fbc651770563eb0948/b23cbb82-a52e-4143-a6f0-e7586f4d9dbe/TUK+textured+-+12%27%27+x+12%27%27.png?format=1500w" alt="TUK" />
+  </div>
+  <ul class="footer-nav">
+    <li><a href="#about">About</a></li>
+    <li><a href="#music">Music</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#live-stream">Live</a></li>
+    <li><a href="#photos">Photos</a></li>
+    <li><a href="#shop">Merch</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <p class="footer-copy">&copy; 2025 TUK Band Official &mdash; Green Bay, Wisconsin</p>
+</footer>
+
+<script>
+  /* ── NAV ── */
+  function toggleNav() {
+    document.getElementById('main-nav').classList.toggle('nav-open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('main-nav').classList.remove('nav-open'));
+  });
+
+  /* ── SCROLL REVEAL ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── MERCH — loads from /.netlify/functions/products ── */
+  async function loadMerch() {
+    const grid = document.getElementById('merch-grid');
+    const errorEl = document.getElementById('merch-error');
+    try {
+      const res = await fetch('/.netlify/functions/products');
+      if (!res.ok) throw new Error('Failed to fetch products');
+      const products = await res.json();
+
+      if (!products.length) throw new Error('No products');
+
+      grid.innerHTML = products.slice(0, 8).map(p => {
+        const img = p.thumbnail_url
+          ? `<img src="${p.thumbnail_url}" alt="${p.name}" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:grayscale(15%);transition:filter 0.3s;" onmouseover="this.style.filter='grayscale(0%)'" onmouseout="this.style.filter='grayscale(15%)'" />`
+          : `<div class="merch-img-placeholder"><svg viewBox="0 0 24 24"><path d="M20 7h-4V5c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2z" fill="var(--border)"/></svg></div>`;
+        const price = p.min_price
+          ? `$${parseFloat(p.min_price).toFixed(2)}`
+          : 'Shop Now →';
+        return `
+          <a href="https://www.tukbandofficial.com/merch-store" target="_blank" class="merch-card">
+            ${img}
+            <div class="merch-info">
+              <div class="merch-name">${p.name}</div>
+              <div class="merch-price">${price}</div>
+            </div>
+          </a>`;
+      }).join('');
+
+    } catch (err) {
+      grid.style.display = 'none';
+      errorEl.style.display = 'block';
+      console.error('Merch load error:', err);
+    }
+  }
+
+  loadMerch();
+  const TWITCH_CHANNEL = 'tukbandofficial';
+  const TWITCH_VOD_URL = 'https://clips.twitch.tv/SparklyInexpensiveCobblerRlyTho-IPzj6vX3MiYREOkR';
+  // Extract clip slug from the VOD URL
+  const CLIP_SLUG = 'SparklyInexpensiveCobblerRlyTho-IPzj6vX3MiYREOkR';
+
+  function buildIframe(src) {
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.allowFullscreen = true;
+    iframe.allow = 'autoplay; fullscreen';
+    iframe.style.cssText = 'width:100%;height:100%;min-height:400px;border:none;display:block;position:absolute;inset:0;';
+    return iframe;
+  }
+
+  function setLive() {
+    const container = document.getElementById('twitch-container');
+    container.innerHTML = '';
+    const parent = window.location.hostname || 'localhost';
+    container.appendChild(buildIframe(
+      `https://player.twitch.tv/?channel=${TWITCH_CHANNEL}&parent=${parent}&autoplay=true&muted=false`
+    ));
+    document.getElementById('live-badge').style.display = 'inline-flex';
+    document.getElementById('stream-heading').innerHTML = 'WE ARE<br>LIVE ON<br>TWITCH';
+    document.getElementById('stream-note').textContent = 'TUK is live right now — tune in!';
+  }
+
+  function setVOD() {
+    const container = document.getElementById('twitch-container');
+    container.innerHTML = '';
+    const parent = window.location.hostname || 'localhost';
+    container.appendChild(buildIframe(
+      `https://clips.twitch.tv/embed?clip=${CLIP_SLUG}&parent=${parent}&autoplay=false`
+    ));
+  }
+
+  async function checkTwitchLive() {
+    // Twitch's public undocumented stream status endpoint (no API key needed)
+    // Falls back to VOD if the check fails or returns offline
+    try {
+      const res = await fetch(
+        `https://api.twitch.tv/helix/streams?user_login=${TWITCH_CHANNEL}`,
+        { headers: { 'Client-Id': 'kimne78kx3ncx6brgo4mv6wki5h1ko' } }
+        // ↑ This is Twitch's own public web client ID — safe to use for read-only stream status
+      );
+      const json = await res.json();
+      if (json.data && json.data.length > 0) {
+        setLive();
+      } else {
+        setVOD();
+      }
+    } catch {
+      // If the check fails for any reason, just show the VOD
+      setVOD();
+    }
+  }
+
+  checkTwitchLive();
+  // Re-check every 2 minutes so the page reacts if they go live while a visitor is on-site
+  setInterval(checkTwitchLive, 120000);
+
+  /* ── CONTACT FORM ── */
+  /* ── CONTACT FORM (Formspree → tukmusicofficial@gmail.com) ──
+     One-time setup: go to https://formspree.io/f/tukmusicofficial@gmail.com
+     and click "Claim this form" while logged into (or signing up for) Formspree.
+     That's it — submissions will land in Gmail automatically. ── */
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    const btn = form.querySelector('[type="submit"]');
+    const data = new FormData(form);
+
+    status.style.display = 'block';
+    status.textContent = 'Sending...';
+    status.style.color = 'var(--muted)';
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+      const res = await fetch('https://formspree.io/f/xdaywaza', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      const json = await res.json();
+      if (res.ok) {
+        status.textContent = 'Message sent! We\'ll get back to you soon.';
+        status.style.color = '#00c896';
+        form.reset();
+        btn.textContent = 'Sent \u2713';
+        setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message'; }, 4000);
+      } else {
+        throw new Error(json?.errors?.[0]?.message || 'Form error');
+      }
+    } catch (err) {
+      status.textContent = 'Something went wrong — email us directly at tukmusicofficial@gmail.com';
+      status.style.color = 'var(--accent)';
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+      console.error(err);
+    }
+  }
+</script>
+
+</body>
+</html>
